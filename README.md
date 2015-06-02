@@ -13,7 +13,7 @@ $ brew install deviceconsole --HEAD
 Link identity editor – allows you to sign or re-sign a binary with a fake code signature (and optional entitlements plist) so it'll run on jailbroken iOS devices, or view the entitlements plist on a binary. From [saurik's Git repo](http://gitweb.saurik.com/ldid.git).
 
 ### `theos`
-Build system for various types of projects, mainly iOS jailbreak projects. Since deviceconsole has never been given proper releases and versions, you must install with `--HEAD`:
+Build system for various types of projects, mainly iOS jailbreak projects. Since Theos has never been given proper releases and versions, you must install with `--HEAD`:
 
 ```
 $ brew install theos --HEAD
