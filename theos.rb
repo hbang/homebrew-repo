@@ -3,6 +3,8 @@ class Theos < Formula
   head "https://github.com/kirb/theos.git", :branch => "master"
 
   depends_on "ldid"
+  depends_on "dpkg"
+  depends_on :xcode
 
   def install
     (prefix/"root").install Dir["*"]
