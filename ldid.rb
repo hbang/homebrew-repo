@@ -1,10 +1,10 @@
 class Ldid < Formula
   homepage "https://cydia.saurik.com/info/ldid/"
-  url "https://git.saurik.com/ldid.git",
+  url "git://git.saurik.com/ldid.git",
     :tag => "v1.1.2",
     :revision => "0204ccf74a729c6cc83f2a5e1be3bc1c728b7ccb"
 
-  head "https://git.saurik.com/ldid.git", :branch => "master"
+  head "git://git.saurik.com/ldid.git", :branch => "master"
 
   def install
     system "./make.sh"
