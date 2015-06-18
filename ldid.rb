@@ -2,7 +2,7 @@ class Ldid < Formula
   homepage "https://cydia.saurik.com/info/ldid/"
   url "git://git.saurik.com/ldid.git",
     :tag => "v1.1.2",
-    :revision => "0204ccf74a729c6cc83f2a5e1be3bc1c728b7ccb"
+    :revision => "604cc486bdefb246c984a21dbb30cdaf8b0a7f4d"
 
   head "git://git.saurik.com/ldid.git", :branch => "master"
 
