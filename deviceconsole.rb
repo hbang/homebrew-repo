@@ -11,7 +11,7 @@ class Deviceconsole < Formula
       "SYMROOT=build",
       "DSTROOT=build"
 
-    bin.install "build/Release/deviceconsole"
+    bin.install "build/usr/local/bin/deviceconsole"
   end
 
   test do
