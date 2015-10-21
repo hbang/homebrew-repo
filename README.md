@@ -24,4 +24,4 @@ $ brew install theos --HEAD
 A symlink to Theos is installed to `/usr/local/theos` (or equivalent for your Homebrew prefix). You may want to create another symlink, for instance, if you previously stored Theos at /opt/theos.
 
 ## License
-Licensed under the [WTFPL](http://www.wtfpl.net/about/), version 2. 
+This repository is released into the [Public Domain](http://unlicense.org/).
