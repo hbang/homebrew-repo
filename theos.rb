@@ -1,39 +1,49 @@
 class Theos < Formula
   homepage "http://theiphonewiki.net/index.php/Theos"
-  head "https://github.com/kirb/theos.git", :branch => "master"
+  url "https://github.com/kirb/theos.git", :branch => "master"
+  version "stable"
 
-  depends_on "ldid"
-  depends_on "dpkg"
   depends_on :xcode
 
+  # These tools are the most common ones used in conjunction with Theos, but
+  # they are not required.
+  depends_on "ldid" => :recommended
+  depends_on "dpkg" => :recommended
+
+  keg_only <<-EOS.undent
+    Theos is intended to be self-contained. It also contains "include" and "lib"
+    directories that should not be mixed with the system's. (Ignore the generic
+    message from Homebrew below.)
+  EOS
+
   def install
-    (prefix/"root").install Dir["*"]
-
-    bin.install_symlink prefix/"root"/"logos.pl" => "logos"
-    bin.install_symlink prefix/"root"/"logify.pl" => "logify"
-
-    bin.install_symlink prefix/"root"/"nic.pl" => "nic"
-    bin.install_symlink prefix/"root"/"nicify.pl" => "nicify"
-    bin.install_symlink prefix/"root"/"denicify.pl" => "denicify"
-
-    HOMEBREW_PREFIX.install_symlink prefix/"root" => "theos"
+    prefix.install Dir["*"]
   end
 
   def caveats; <<-EOS.undent
-    Theos has been installed to #{HOMEBREW_PREFIX}/theos.
-    If you already had Theos installed elsewhere, you might want to make a symlink
-    of your own:
+    Theos has been installed to #{opt_prefix}.
 
-      ln -s #{HOMEBREW_PREFIX}/theos /opt/theos
-    EOS
+    To use Theos, you must first set the $THEOS variable in your environment, and
+    add the bin directory to your $PATH:
+
+      export THEOS=#{opt_prefix}
+      export PATH=$THEOS/bin:$PATH
+
+    The #{HOMEBREW_PREFIX}/theos symlink that existed in previous version of this
+    formula has been removed. Please use #{opt_prefix}.
+  EOS
   end
 
   test do
+    # TODO: this is broken
     require "open3"
-    Open3.popen3("#{bin}/nic --packagename=sh.brew.test --name=test --template=iphone/tweak") do |stdin, _, _|
+    Open3.popen3("#{bin}/nic.pl --packagename=sh.brew.test --name=test --template=iphone/tweak") do |stdin, _, _|
       stdin.write "com.apple.springboard\nSpringBoard\n"
     end
 
-    system bin/"logos", "test/Tweak.xm"
+    cd "test" do
+      system bin/"logos", "Tweak.xm"
+      system "make"
+    end
   end
 end
