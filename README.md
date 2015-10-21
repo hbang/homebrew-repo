@@ -9,7 +9,9 @@ Watch a connected iOS device or the iOS Simulator's system log. Provides colored
 $ brew install deviceconsole --HEAD
 ```
 
-### `ldid`
+### ~~`ldid`~~
+**Now in [the main Homebrew repo](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ldid.rb).**
+
 Link identity editor – allows you to sign or re-sign a binary with a fake code signature (and optional entitlements plist) so it'll run on jailbroken iOS devices, or view the entitlements plist on a binary. From [saurik's Git repo](http://gitweb.saurik.com/ldid.git).
 
 ### `theos`
