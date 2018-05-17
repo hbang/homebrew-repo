@@ -1,20 +1,15 @@
 class Theos < Formula
-  homepage "http://theiphonewiki.net/index.php/Theos"
-  url "https://github.com/kirb/theos.git", :branch => "master"
-  version "stable"
+  homepage "https://theos.github.io/"
+  url "https://github.com/theos/theos.git", :tag => "2.4"
+  head "https://github.com/theos/theos.git"
 
   depends_on :xcode
 
   # These tools are the most common ones used in conjunction with Theos, but
   # they are not required.
   depends_on "ldid" => :recommended
-  depends_on "dpkg" => :recommended
 
-  keg_only <<~EOS
-    Theos is intended to be self-contained. It also contains "include" and "lib"
-    directories that should not be mixed with the system's. (Ignore the generic
-    message from Homebrew below.)
-  EOS
+  keg_only "Theos is self-contained and must not be mixed with system directories"
 
   def install
     prefix.install Dir["*"]
@@ -23,27 +18,24 @@ class Theos < Formula
   def caveats; <<~EOS
     Theos has been installed to #{opt_prefix}.
 
-    To use Theos, you must first set the $THEOS variable in your environment, and
-    add the bin directory to your $PATH:
+    To use Theos, you must first set the $THEOS variable in your environment:
 
-      export THEOS=#{opt_prefix}
-      export PATH=$THEOS/bin:$PATH
-
-    The #{HOMEBREW_PREFIX}/theos symlink that existed in previous version of this
-    formula has been removed. Please use #{opt_prefix}.
+      echo 'export THEOS=#{opt_prefix}' >> #{shell_profile}
+      source #{shell_profile}
   EOS
   end
 
   test do
-    # TODO: this is broken
     require "open3"
-    Open3.popen3("#{bin}/nic.pl --packagename=sh.brew.test --name=test --template=iphone/tweak") do |stdin, _, _|
+    Open3.popen3("#{bin}/nic.pl", "--packagename=sh.brew.test", "--name=test", "--template=iphone/tweak") do |stdin, stdout, _|
       stdin.write "com.apple.springboard\nSpringBoard\n"
+      stdin.close
+      assert_match "\nDone.", stdout.read
     end
 
-    cd "test" do
-      system bin/"logos", "Tweak.xm"
-      system "make"
+    cd testpath/"test" do
+      system bin/"logos.pl", "Tweak.xm"
+      system "make", "THEOS=#{opt_prefix}"
     end
   end
 end
