@@ -9,15 +9,14 @@ Watch a connected iOS device or the iOS Simulator's system log. Provides colored
 $ brew install deviceconsole --HEAD
 ```
 
-### ~~`ldid`~~
-**Now in [the main Homebrew repo](https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ldid.rb).**
-
-Link identity editor – allows you to sign or re-sign a binary with a fake code signature (and optional entitlements plist) so it'll run on jailbroken iOS devices, or view the entitlements plist on a binary. From [saurik's Git repo](http://gitweb.saurik.com/ldid.git).
-
 ### `theos`
-Build system for various types of projects, mainly iOS jailbreak projects.
+Make-based build system for various types of projects, mainly iOS jailbreak projects.
 
-Theos is installed to `/usr/local/opt/theos` (or equivalent for your Homebrew prefix). You may want to create another symlink, for instance, if you previously stored Theos at /opt/theos. Make sure you set `$THEOS` in your environment (see `brew info theos` for details).
+Theos is installed to `/usr/local/opt/theos` (or equivalent for your Homebrew prefix). You may want to create another symlink, for instance, if you previously stored Theos at `/opt/theos`. Make sure you set `$THEOS` in your environment (see `brew info theos` for details).
+
+This formula is an experiment and not officially supported, but still should work no worries.
+
+* `--without-ldid`: Don’t install the recommended ldid dependency.
 
 ## License
 This repository is released into the [Public Domain](http://unlicense.org/).
