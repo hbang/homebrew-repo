@@ -10,7 +10,7 @@ class Theos < Formula
   depends_on "ldid" => :recommended
   depends_on "dpkg" => :recommended
 
-  keg_only <<-EOS.undent
+  keg_only <<~EOS
     Theos is intended to be self-contained. It also contains "include" and "lib"
     directories that should not be mixed with the system's. (Ignore the generic
     message from Homebrew below.)
@@ -20,7 +20,7 @@ class Theos < Formula
     prefix.install Dir["*"]
   end
 
-  def caveats; <<-EOS.undent
+  def caveats; <<~EOS
     Theos has been installed to #{opt_prefix}.
 
     To use Theos, you must first set the $THEOS variable in your environment, and
